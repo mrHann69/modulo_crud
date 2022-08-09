@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "idUser": 123467,
+            "username": "rocket",
+            "password": "123ert",
+            "contact" : 9870    
+        },
+        {
+            "idUser": 67890,
+            "username": "rocky",
+            "password": "123erty",
+            "contact" : 9871    
+        },
+        {
+            "idUser": 9840,
+            "username": "rocket3",
+            "password": "123ert3",
+            "contact" : 9873    
+        },
+        {
+            "idUser": 8520,
+            "username": "rocket4",
+            "password": "123ert4",
+            "contact" : 9874    
+        }
+    ]
+}
