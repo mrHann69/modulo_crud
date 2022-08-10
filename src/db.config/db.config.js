@@ -21,7 +21,6 @@ const fullURL = `mongodb://${dbconf.DB_USER}:${dbconf.DB_PASSWORD}@${dbconf.DB_H
 
 const urlAtlas = `mongodb+srv://${dbconf.DB_USER}:${dbconf.DB_PASSWORD}@${dbconf.DB_CLUSTER}.mongodb.net/${dbconf.DB_NAME}?retryWrites=true&w=majority`; 
                         
-//const urlAtlas = `mongodb+srv://msp:<password>@cluster0.lgnud.mongodb.net/?retryWrites=true&w=majority`
 
 //exportar el objeto conf, configuracion necesaria para la conexion
 //con la base de datos mongo

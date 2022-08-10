@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const pkg = require('../package.json');
-require('./db.config/db.js').getConnLocal();  // llama a la inicializacion de la conexion 
-//require('./db.config/db.js').getConnAtlas();  // llama a la inicializacion de la conexion 
+//require('./db.config/db.js').getConnLocal();  // llama a la inicializacion de la conexion 
+require('./db.config/db.js').getConnAtlas();  // llama a la inicializacion de la conexion 
 
 
 //rutas
@@ -27,7 +27,7 @@ app.get('/',(req,res)=>{
     res.status(200);
     res.json({
         "text":
-            "...Desarrollo de Software II...\nproyecto final: API + MERN + deployment + CICD + GitHub Actions\n"
+            "...Desarrollo de Software II...\nproyecto final: API + MERN + Heroku deploy + CICD + GitHub Actions\n"
     });
 });
 
