@@ -1,14 +1,18 @@
 'use strict';
 const app = require('./app.js');
-const dotenv = require('dotenv');
-
+require('dotenv').config();
 //configuracion de variables de entorno
-dotenv.config();
+
 
 //configuracion puerto
-const port =  process.env.PORT || 4000 ;
+const port =  process.env.APP_PORT || 4000 ;
 
 //servidor en escucha
-app.listen(port, ()=>{
-    console.log(`server running on port: ${port}`);
-});
+try {
+    app.listen(port, ()=>{
+        console.log(`server running on port: ${port}`);
+    });    
+} catch (error) {
+    console.error(error);
+}
+

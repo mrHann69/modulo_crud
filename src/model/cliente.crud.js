@@ -1,20 +1,17 @@
 'use strict';
-const mongoose = require('mongoose');
-const Cliente = require('../db.models/cliente.model.js');
+const Client = require('../db.models/cliente.model.js');
 
 /* Create Cliente*/
 const createClient = async (req, res) => {
     try {
-        const { idUser, username, password, contact } = req.body;
-        const newClient = new Cliente({
-            _id: new mongoose.Types.ObjectId(),
-            idUser,
-            username,
-            password,
-            contact
-        });
-        console.log(newClient);
-        await newClient.save().catch((e) => console.log(e));
+        const { iduser, username, password, contact } = req.body;
+        const newClient = new Client();
+            newClient.iduser = iduser;
+            newClient.username = username;
+            newClient.password = password;
+            newClient.contact = contact;
+
+        await newClient.save();
         res.status(200);
         res.json({ status: "cliente creado" });
     } catch (err) {
@@ -27,49 +24,58 @@ const createClient = async (req, res) => {
 const getAllClients = async (req, res) => {
     //console.log("llegué a solicitar a la BD");
     try {
-        const clients = await Cliente.find();
+        const clients = await Client.find().lean();
         res.status(202);
-        res.json(clients);
-        //res.json(users);
+        res.send(clients);
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500);
-        res.send({});
+        res.json({msg:"no hay clientes"});
     }
 }
 
 /* Read One Client*/
 const getOneClient = async (req, res) => {
     try {
-        const cliente = await Cliente.findById(req.params.id);
+        const { id } = req.params;
+        const oneCliente = await Client.findOne({iduser:id}).lean();
         res.status(200);
-        res.json(cliente);
+        res.json(oneCliente);
     } catch (err) {
         console.log(err);
         res.status(500);
-        res.json({});
+        res.json({msg : "cliente no encontrado"});
     }
 }
 
 /* Update Cliente*/
 const updateClient = async (req, res) => {
     try {
-        const updatedClient = await Cliente.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.status(200);
+        // const updatedClient = await Cliente.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const { id } = req.params;
+        const newData =  {  username :req.body.username, password: req.body.password, contact:req.body.contact };
+        const updatedClient = await Client.findOneAndUpdate({iduser:id}, newData, { new: true });
+        res.status(201);
         res.json(updatedClient);
     } catch (err) {
         console.log(err);
+        res.status(500)
+        res.json({msg:"cliente NO actualizado"})
     }
 }
 
 /* Delete Cliente*/
 const deleteClient = async (req, res) => {
     try {
-        await Cliente.findByIdAndRemove(req.params.id);
+        const { id } = req.params;
+        await Client.deleteOne({iduser:id});
+        // await Cliente.findByIdAndDelete(req.params.id);
         res.status(204);
+        res.json({"msg":"cliente borrado"});
     } catch (err) {
         console.log(err);
         res.status(500);
+        res.json({"msg":"cliente NO borrado"});
     }
 }
 

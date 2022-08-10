@@ -4,6 +4,8 @@ const app = express();
 const morgan = require('morgan');
 const pkg = require('../package.json');
 require('./db.config/db.js').getConnLocal();  // llama a la inicializacion de la conexion 
+//require('./db.config/db.js').getConnAtlas();  // llama a la inicializacion de la conexion 
+
 
 //rutas
 const management = require('./routes/management.route.js');
@@ -21,6 +23,15 @@ app.get('/api/version',(req,res)=>{
     });
 });
 
+app.get('/',(req,res)=>{
+    res.status(200);
+    res.json({
+        "text":
+            "...Desarrollo de Software II...\nproyecto final: API + MERN + deployment + CICD + GitHub Actions\n"
+    });
+});
+
+
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 //configuracion de morgan
@@ -30,7 +41,7 @@ app.use(express.json());
 
 
 //definicion de rutas
-app.use('/api/management', management);
+app.use('/api', management);
 app.use('/api/pruebas', pruebas);
 app.use('*', notFound);
 

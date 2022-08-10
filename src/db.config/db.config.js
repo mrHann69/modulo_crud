@@ -1,3 +1,4 @@
+'use strict';
 require('dotenv').config();
  
 const dbconf = {
@@ -11,19 +12,16 @@ const dbconf = {
 
 const options = {
     useNewUrlParser: process.env.USE_NEW_URL_PARSER,
-    useFindAndModify: process.env.USE_FIND_AND_MODIFY,
     useUnifiedTopology: process.env.USE_UNIFIED_TOPOLOGY
 }
 
 const url = `mongodb://localhost:27017/clientes`;
-                        console.log(url);
-const fullURL = `mongodb://${dbconf.DB_USER}:${dbconf.DB_PASSWORD}@
-                    ${dbconf.DB_HOST}:${dbconf.DB_PORT}/${dbconf.DB_NAME}`;
+                     
+const fullURL = `mongodb://${dbconf.DB_USER}:${dbconf.DB_PASSWORD}@${dbconf.DB_HOST}:${dbconf.DB_PORT}/${dbconf.DB_NAME}`;
 
-const urlAtlas = `mongodb+srv://${dbconf.DB_USER}:${dbconf.DB_PASSWORD}@
-                    ${dbconf.DB_CLUSTER}.mongodb.net/${dbconf.DB_NAME}?retryWrites=true&w=majority`; 
+const urlAtlas = `mongodb+srv://${dbconf.DB_USER}:${dbconf.DB_PASSWORD}@${dbconf.DB_CLUSTER}.mongodb.net/${dbconf.DB_NAME}?retryWrites=true&w=majority`; 
                         
-
+//const urlAtlas = `mongodb+srv://msp:<password>@cluster0.lgnud.mongodb.net/?retryWrites=true&w=majority`
 
 //exportar el objeto conf, configuracion necesaria para la conexion
 //con la base de datos mongo
