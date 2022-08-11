@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 //configuracion puerto
-const port =  process.env.APP_PORT || 4000 ;
+const port =  process.env.APP_PORT || 8080 ;
 
 //servidor en escucha
 try {

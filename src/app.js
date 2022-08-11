@@ -27,7 +27,7 @@ app.get('/',(req,res)=>{
     res.status(200);
     res.json({
         "mensaje":
-            "...Desarrollo de Software II...\nproyecto final: API + MERN + Heroku deploy + CICD + GitHub Actions\n"
+            "...Desarrollo de Software II...\nProyecto final: API + MERN + Heroku deploy + CICD + GitHub Actions\n"
     });
 });
 
