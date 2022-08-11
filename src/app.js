@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const app = express();
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const pkg = require('../package.json');
 //require('./db.config/db.js').getConnLocal();  // llama a la inicializacion de la conexion 
 require('./db.config/db.js').getConnAtlas();  // llama a la inicializacion de la conexion 
@@ -35,7 +35,7 @@ app.get('/',(req,res)=>{
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 //configuracion de morgan
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 //formato de comunicacion
 app.use(express.json());
 
