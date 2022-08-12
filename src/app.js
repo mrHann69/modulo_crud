@@ -11,31 +11,33 @@ require('./db.config/db.js').getConnAtlas();  // llama a la inicializacion de la
 const management = require('./routes/management.route.js');
 const notFound = require('./routes/notFound');
 const pruebas = require('./routes/pruebas.route');
+const {createToken} = require('./middlewares/createToken.js'); 
 
 // version
 app.set('pkg',pkg);
-app.get('/api/version',(req,res)=>{
-    res.status(200);
-    res.json({
-        name: app.get('pkg').name,
-        description : app.get('pkg').description,
-        version: app.get('pkg').version
-    });
-});
-
 app.get('/',(req,res)=>{
     res.status(200);
     res.json({
-        "mensaje":
-            "...Desarrollo de Software II...\nProyecto final: API + MERN + Heroku deploy + CICD + GitHub Actions\n"
+        nombre: app.get('pkg').name,
+        descripcion : app.get('pkg').description,
+        version: app.get('pkg').version,
+        comentario: "...Desarrollo de Software II...\nProyecto final: API + MERN + Heroku deploy + CICD + GitHub Actions\n",
+        usage: "en la ruta  '/' pasar un id de usuario registrado, luego devolverá un token, este se usa para las operaciones CREATE UPDATE DELETE"
     });
 });
 
+app.get('/:id',(req,res)=>{
+    const token = createToken(req.params.id);
+    res.status(200);
+    res.json({
+        tuToken:`${token}`
+    });
+});
 
 //middlewares
 app.use(express.urlencoded({ extended: true }));
 //configuracion de morgan
-//app.use(morgan('dev'));
+// app.use(morgan('dev'));
 //formato de comunicacion
 app.use(express.json());
 

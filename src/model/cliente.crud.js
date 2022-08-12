@@ -15,14 +15,14 @@ const createClient = async (req, res) => {
         res.status(200);
         res.json({ status: "cliente creado" });
     } catch (err) {
-        res.status(500).send(err)
         console.log(err);
+        res.status(500);
+        res.json({msg:"cliente NO creado"});
     }
 }
 
 /* Read All Clients*/
 const getAllClients = async (req, res) => {
-    //console.log("llegué a solicitar a la BD");
     try {
         const clients = await Client.find().lean();
         res.status(202);
@@ -30,7 +30,7 @@ const getAllClients = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500);
-        res.json({msg:"no hay clientes"});
+        res.json({msg:"clientes NO encontrados"});
     }
 }
 
@@ -44,14 +44,13 @@ const getOneClient = async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500);
-        res.json({msg : "cliente no encontrado"});
+        res.json({msg : "cliente NO encontrado"});
     }
 }
 
 /* Update Cliente*/
 const updateClient = async (req, res) => {
     try {
-        // const updatedClient = await Cliente.findByIdAndUpdate(req.params.id, req.body, { new: true });
         const { id } = req.params;
         const newData =  {  username :req.body.username, password: req.body.password, contact:req.body.contact };
         const updatedClient = await Client.findOneAndUpdate({iduser:id}, newData, { new: true });
@@ -69,13 +68,12 @@ const deleteClient = async (req, res) => {
     try {
         const { id } = req.params;
         await Client.deleteOne({iduser:id});
-        // await Cliente.findByIdAndDelete(req.params.id);
         res.status(204);
         res.json({"msg":"cliente borrado"});
     } catch (err) {
         console.log(err);
         res.status(500);
-        res.json({"msg":"cliente NO borrado"});
+        res.json({msg:"cliente NO borrado"});
     }
 }
 
